@@ -15,12 +15,23 @@ DigitalOut led2(LED2);
 // Timer for debouncing
 Timer debounce_timer;
 
+const float x_threshold = 2.0; // Change this value as needed
+const float y_threshold = 2.0;
+const float z_threshold = 2.0;
+
 // 0 - Idle/Locked/Unlocked
 // 1 - Record
 // 2 - Locking/Unlocking
 uint8_t state = IDLE_LOCKED_UNLOCKED;
 
 bool is_unlock = true;
+
+// Placeholder function for getting gyroscope data (simulated)
+void get_gyro_data(float *x, float *y, float *z) {
+    *x = rand() % 10 - 5; // Simulate x-axis gyro data
+    *y = rand() % 10 - 5; // Simulate y-axis gyro data
+    *z = rand() % 10 - 5; // Simulate z-axis gyro data
+}
 
 // Change the at the falling edge
 void button_pressed_fall()
@@ -80,6 +91,15 @@ int main()
       // Record
       led1.write(1);
       led2.write(1);
+      // Get gyroscope data
+      get_gyro_data(&x, &y, &z);
+
+      // Check if movement exceeds threshold
+      if (abs(x) > x_threshold || abs(y) > y_threshold || abs(z) > z_threshold) {
+          printf("Movement detected! X: %.2f, Y: %.2f, Z: %.2f\n", x, y, z);
+          // TODO: Store movement data
+
+      
 
       // Detect gesture
       // Store gesture
