@@ -1,3 +1,5 @@
+#Create parameters for registering x,y,z movements (10?)
+
 #include "mbed.h"
 
 #define IDLE_LOCKED_UNLOCKED 0
